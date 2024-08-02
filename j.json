@@ -1,0 +1,51 @@
+[{
+   
+    "user_id": {
+      "$oid": "6627680e812d45b22a248486"
+    },
+    "name": "2",
+    "email": "123456@gmail.com",
+    "phone": "2",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/contacts-56fbe.appspot.com/o/images%2F147e248a17f4cc5629b0a8992443440d?alt=media&token=cc7aaf17-7abc-48a8-b65e-e201b6e4ef65",
+    "createdAt": {
+      "$date": "2024-04-24T09:41:52.707Z"
+    },
+    "updatedAt": {
+      "$date": "2024-04-24T10:31:25.345Z"
+    },
+    "__v": 0
+  } , {
+   
+    "user_id": {
+      "$oid": "6627680e812d45b22a248486"
+    },
+    "name": "2",
+    "email": "123456@gmail.com",
+    "phone": "2",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/contacts-56fbe.appspot.com/o/images%2F147e248a17f4cc5629b0a8992443440d?alt=media&token=cc7aaf17-7abc-48a8-b65e-e201b6e4ef65",
+    "createdAt": {
+      "$date": "2024-04-24T09:41:52.707Z"
+    },
+    "updatedAt": {
+      "$date": "2024-04-24T10:31:25.345Z"
+    },
+    "__v": 0
+  },
+  {
+   
+    "user_id": {
+      "$oid": "6627680e812d45b22a248486"
+    },
+    "name": "2",
+    "email": "123456@gmail.com",
+    "phone": "2",
+    "avatar": "https://firebasestorage.googleapis.com/v0/b/contacts-56fbe.appspot.com/o/images%2F147e248a17f4cc5629b0a8992443440d?alt=media&token=cc7aaf17-7abc-48a8-b65e-e201b6e4ef65",
+    "createdAt": {
+      "$date": "2024-04-24T09:41:52.707Z"
+    },
+    "updatedAt": {
+      "$date": "2024-04-24T10:31:25.345Z"
+    },
+    "__v": 0
+  }
+]
