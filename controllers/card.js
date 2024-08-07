@@ -23,11 +23,11 @@ const getCards = async (req, res) => {
  */
 const getCardWrapper = async (req, res) => {
   const card = await CardModel.find({ isWrapper: true });
-  if (!card) {
+  if (!card[0]) {
     res.status(404);
     throw new Error('Card not found');
   }
-  res.status(200).json(card);
+  res.status(200).json(card[0]);
 };
 
 module.exports = { getCards, getCardWrapper };

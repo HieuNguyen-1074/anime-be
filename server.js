@@ -19,6 +19,7 @@ app.use(
 );
 
 app.use('/api/card', require('./routers/card'));
+app.use('/api/collectors', require('./routers/collector'));
 // app.use(errorHandler);
 
 app.listen(port, () => {
