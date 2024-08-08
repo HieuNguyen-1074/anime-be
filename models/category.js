@@ -10,6 +10,10 @@ const categorySchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
 const Category = mongoose.model('Card-category', categorySchema);
