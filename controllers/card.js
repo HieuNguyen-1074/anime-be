@@ -51,6 +51,8 @@ const getCardWrapper = async (req, res) => {
   }
   console.log(cards[0]);
   res.status(200).json(cards[0]);
+  console.log(cards[0]);
+  res.status(200).json(cards[0]);
 };
 
 module.exports = { getCards, getCardWrapper };
