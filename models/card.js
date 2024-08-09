@@ -6,8 +6,8 @@ const Card = mongoose.Schema({
     type: String,
     required: true,
   },
-  categoryId: {
-    type: Schema.Types.ObjectId,
+  emblemIds: {
+    type: Schema.Types.Array,
     required: true,
     ref: 'Category', // Assuming you have a Category model
   },
@@ -20,6 +20,14 @@ const Card = mongoose.Schema({
     required: false,
   },
   image: {
+    type: String,
+    required: false,
+  },
+  mainColor: {
+    type: String,
+    required: false,
+  },
+  categoryId: {
     type: String,
     required: false,
   },

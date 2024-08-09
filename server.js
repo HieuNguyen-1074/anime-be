@@ -4,6 +4,9 @@ const dotenv = require('dotenv').config();
 
 var cors = require('cors');
 const connectDb = require('./config/dbConnection');
+const { listAllFiles } = require('./jobs/emblem');
+
+const { readColor, listAllFilesCards } = require('./jobs/cards');
 
 connectDb();
 
@@ -17,9 +20,10 @@ app.use(
     origin: '*',
   })
 );
-
+console.log(listAllFilesCards());
 app.use('/api/card', require('./routers/card'));
 app.use('/api/collectors', require('./routers/collector'));
+app.use('/api/emblems', require('./routers/emblems'));
 // app.use(errorHandler);
 
 app.listen(port, () => {
