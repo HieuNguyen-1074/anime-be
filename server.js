@@ -20,7 +20,7 @@ app.use(
     origin: '*',
   })
 );
-console.log(listAllFilesCards());
+// console.log(listAllFilesCards());
 app.use('/api/card', require('./routers/card'));
 app.use('/api/collectors', require('./routers/collector'));
 app.use('/api/emblems', require('./routers/emblems'));

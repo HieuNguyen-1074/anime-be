@@ -35,6 +35,10 @@ const Card = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  isHighLight: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const CardModel = mongoose.model('card', Card);
