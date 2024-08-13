@@ -21,6 +21,7 @@ app.use(
   })
 );
 // console.log(listAllFilesCards());
+// console.log(listAllFiles());
 app.use('/api/card', require('./routers/card'));
 app.use('/api/collectors', require('./routers/collector'));
 app.use('/api/emblems', require('./routers/emblems'));

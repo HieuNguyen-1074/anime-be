@@ -71,7 +71,7 @@ const getCardHighlight = async (req, res) => {
       ),
     };
   });
-  console.log(cards);
+
   res.status(200).json(cards);
 };
 

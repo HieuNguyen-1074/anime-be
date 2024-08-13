@@ -52,7 +52,6 @@ const createContact = asyncHandler(async (req, res) => {
   const avatar = req.file;
   try {
     if (!name || !email || !phone || !avatar) {
-      console.log('first');
       res.status(400);
       throw new Error('all fields are required');
     }

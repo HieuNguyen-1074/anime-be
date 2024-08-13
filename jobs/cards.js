@@ -9,6 +9,8 @@ const getColors = require('get-image-colors');
 const Emblem = require('../models/emblem');
 const CardModel = require('../models/card');
 
+const Jimp = require('jimp');
+
 const getRandomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
 };
@@ -33,19 +35,29 @@ async function listAllFilesCards() {
 
     const emblems = await Emblem.find({});
     const categories = await Category.find({});
-    const embId = [];
-    // console.log(emblems);
-    for (let index = 0; index < Math.round(getRandomNumber(0, 33)); index++) {
-      const element = emblems[Math.round(getRandomNumber(0, 33))];
-      console.log(getRandomNumber(0, 33));
-      embId.push(element._id);
-    }
 
     console.log(files.length);
     files.forEach((image, index) => {
       const link = image.metadata.mediaLink;
+
+      // console.log(emblems);
+
       // console.log(files[index].metadata);
-      readColor(link, image.metadata.contentType).then((color) => {
+      readColor(link).then((color) => {
+        const embId = [];
+        for (
+          let index = 0;
+          index < Math.round(getRandomNumber(0, 10));
+          index++
+        ) {
+          const element = emblems[Math.round(getRandomNumber(0, 32))];
+          // console.log(emblems, element);
+          if (!element) continue;
+
+          embId.push(element._id);
+        }
+
+        if (!color) return;
         const data = {
           address: makeRandomString(40),
           emblemIds: embId,
@@ -61,6 +73,7 @@ async function listAllFilesCards() {
           isWrapper: false,
         };
         CardModel.create(data);
+        console.log(index);
       });
     });
   } catch (error) {
@@ -78,17 +91,14 @@ async function listAllFilesCards() {
   }
 }
 
-async function readColor(url, imageType) {
+async function readColor(url) {
   try {
-    console.log(imageType);
-    let fimg = await fetch(url);
+    const image = await Jimp.read(url);
 
-    let buffer = Buffer.from(await fimg.arrayBuffer());
-    // console.log(fimg.name);
-    let colors = await getColors(buffer, imageType);
-    return colors[0].hex();
+    const color = Jimp.intToRGBA(image.getPixelColor(10, 10));
+    return `rgba(${color.r},${color.g},${color.b},${color.a})`;
   } catch (error) {
-    return '#ffff';
+    return;
   }
 }
 
