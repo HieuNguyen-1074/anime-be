@@ -26,6 +26,34 @@ const getCards = async (req, res) => {
   res.status(200).json(cards);
 };
 
+const getCardsbyCategory = async (req, res) => {
+  const { categoryId, pageSize, pageNo } = req.params;
+
+  let cards = [];
+  if (categoryId === 'ALL') {
+    cards = await CardModel.find({}).limit(pageSize).skip(pageSize);
+    res.status(200).json(cards);
+    return;
+  }
+  cards = await CardModel.find({ categoryId: categoryId })
+    .limit(pageSize)
+    .skip(pageSize);
+
+  const emblems = await Emblem.find({});
+  const categories = await Category.find({});
+  cards = cards.filter((card) => {
+    return {
+      ...card._doc,
+      emblems: card.emblemId
+        ? emblems.filter((emblem) => card.emblemId.includes(emblem._id.$oid))
+        : [],
+      category: categories.find((category) => category._id === card.categoryId),
+    };
+  });
+
+  res.status(200).json(cards);
+};
+
 /**
  * get Card by id
  */
@@ -75,4 +103,9 @@ const getCardHighlight = async (req, res) => {
   res.status(200).json(cards);
 };
 
-module.exports = { getCards, getCardWrapper, getCardHighlight };
+module.exports = {
+  getCards,
+  getCardWrapper,
+  getCardHighlight,
+  getCardsbyCategory,
+};

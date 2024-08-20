@@ -3,6 +3,7 @@ const {
   getCards,
   getCardWrapper,
   getCardHighlight,
+  getCardsbyCategory,
 } = require('../controllers/card');
 
 const router = express.Router();
@@ -16,6 +17,10 @@ router
   .route('/wrapper')
 
   .get(getCardWrapper);
+router
+  .route('/category/:categoryId')
+
+  .get(getCardsbyCategory);
 router
   .route('/highlight')
 

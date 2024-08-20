@@ -25,6 +25,7 @@ app.use(
 app.use('/api/card', require('./routers/card'));
 app.use('/api/collectors', require('./routers/collector'));
 app.use('/api/emblems', require('./routers/emblems'));
+app.use('/api/categories', require('./routers/categories'));
 // app.use(errorHandler);
 
 app.listen(port, () => {

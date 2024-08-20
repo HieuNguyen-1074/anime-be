@@ -63,8 +63,8 @@ async function listAllFilesCards() {
           emblemIds: embId,
           categoryId: categories.find(
             (category) =>
-              files[index].metadata.name.indexOf(category.name)?._id || null
-          ),
+              files[index].metadata.name.indexOf(category.name) !== -1
+          )._id,
           name: `No. ${index}`,
           x: '',
           image: link,
@@ -73,7 +73,12 @@ async function listAllFilesCards() {
           isWrapper: false,
         };
         CardModel.create(data);
-        console.log(index);
+        // console.log(
+        //   categories.find(
+        //     (category) =>
+        //       files[index].metadata.name.indexOf(category.name) !== -1
+        //   )
+        // );
       });
     });
   } catch (error) {
