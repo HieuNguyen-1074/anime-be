@@ -12,14 +12,15 @@ const getCards = async (req, res) => {
   const emblems = await Emblem.find({});
   const categories = await Category.find({});
   cards = cards.map((card) => {
+    console.log(
+      categories.find((category) => category._id === card.categoryId)
+    );
     return {
       ...card._doc,
       emblems: emblems.filter((emblem) =>
         card.emblemId.includes(emblem._id.$oid)
       ),
-      category: categories.find(
-        (category) => category._id.$oid === card.categoryId.$oid
-      ),
+      category: categories.find((category) => category._id === card.categoryId),
     };
   });
 
@@ -27,31 +28,37 @@ const getCards = async (req, res) => {
 };
 
 const getCardsbyCategory = async (req, res) => {
-  const { categoryId, pageSize, pageNo } = req.params;
+  const { categoryId } = req.params;
+  const { pageSize, pageNo } = req.query;
 
+  const from = pageNo === 1 ? 0 : (pageNo - 1) * pageSize;
+  const to = from + parseInt(pageSize);
+  console.log(from, to);
   let cards = [];
+  let count = 0;
   if (categoryId === 'ALL') {
-    cards = await CardModel.find({}).limit(pageSize).skip(pageSize);
-    res.status(200).json(cards);
-    return;
+    cards = await CardModel.find({}).limit(to).skip(from);
+    count = await CardModel.find({}).count();
+  } else {
+    cards = await CardModel.find({ categoryId: categoryId })
+      .limit(to)
+      .skip(from);
+    count = await CardModel.find({ categoryId: categoryId }).count();
   }
-  cards = await CardModel.find({ categoryId: categoryId })
-    .limit(pageSize)
-    .skip(pageSize);
 
   const emblems = await Emblem.find({});
   const categories = await Category.find({});
-  cards = cards.filter((card) => {
+  cards = cards.map((card) => {
     return {
       ...card._doc,
-      emblems: card.emblemId
-        ? emblems.filter((emblem) => card.emblemId.includes(emblem._id.$oid))
+      emblems: card.emblemIds
+        ? emblems.filter((emblem) => card.emblemIds.includes(emblem._id))
         : [],
-      category: categories.find((category) => category._id === card.categoryId),
+      category: categories.find((category) => category._id == card.categoryId),
     };
   });
 
-  res.status(200).json(cards);
+  res.status(200).json({ list: cards, total: count });
 };
 
 /**
@@ -68,9 +75,7 @@ const getCardWrapper = async (req, res) => {
       emblems: emblems.filter((emblem) => {
         return card.emblemIds.includes(emblem._id);
       }),
-      category: categories.find(
-        (category) => category._id.$oid === card.categoryId
-      ),
+      category: categories.find((category) => category._id === card.categoryId),
     };
   });
 
@@ -94,9 +99,7 @@ const getCardHighlight = async (req, res) => {
       emblems: emblems.filter((emblem) => {
         return card.emblemIds.includes(emblem._id);
       }),
-      category: categories.find(
-        (category) => category._id.$oid === card.categoryId
-      ),
+      category: categories.find((category) => category._id == card.categoryId),
     };
   });
 

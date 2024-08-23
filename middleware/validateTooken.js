@@ -13,7 +13,7 @@ const validateTooken = asyncHandler(async (req, res, next) => {
       if (err) {
         res.sendStatus(401);
         throw new Error('User is not authorized');
-      } else {
+      } else { 
         req.user = decoded.user;
         next();
       }

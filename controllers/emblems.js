@@ -40,7 +40,7 @@ const getEmblemById = async (req, res) => {
   const ct = categories.map((category) => {
     const cardsMatch = cards.filter(
       (card) =>
-        card.categoryId === category._id.$oid && card.emblemIds.includes(embId)
+        card.categoryId == category._id && card.emblemIds.includes(embId)
     );
 
     return {
