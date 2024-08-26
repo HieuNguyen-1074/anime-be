@@ -57,18 +57,18 @@ const getRandomNumber = (min, max) => {
 async function listAllFiles() {
   try {
     const [files] = await admin.storage().bucket().getFiles({
-      prefix: 'images/emblems',
+      prefix: 'images/worlds',
     });
     nameOfCategories.forEach((name, index) => {
       if (!files[index]?.metadata) return;
       // console.log(files[index].metadata.contentType);
-      // Emblem.create({
-      //   name: name,
-      //   rank: getRandomNumber(1, 10),
-      //   image: files[index].metadata.mediaLink,
-      //   isMutil: index % 6 === 0,
-      //   isNew: index % 5 === 0,
-      // });
+      Emblem.create({
+        name: name,
+        rank: getRandomNumber(1, 10),
+        image: files[index].metadata.mediaLink,
+        isMutil: index % 6 === 0,
+        isNew: index % 5 === 0,
+      });
     });
   } catch (error) {
     if (error.code === 404) {

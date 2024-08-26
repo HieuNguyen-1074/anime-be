@@ -2,73 +2,27 @@ var admin = require('firebase-admin');
 
 var serviceAccount = require('./serviceAccountKey.json');
 const Emblem = require('../models/emblem');
+const Topic = require('../models/topic');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'anime-3b6ad.appspot.com',
-});
 const nameOfCategories = [
-  'Torii gate',
-  'Samurai helmet',
-  'Circular pattern',
-  'Fiery face',
-  'Tiger face',
-  'Happy face',
-  'Mustache and beard face',
-  'Butterfly',
-  'Water swirl',
-  'Monkey face',
-  'Headset face',
-  'Pyramid',
-  'Fox head',
-  'Abstract swirl',
-  'Kite with a string',
-  'Geometric square with an eye',
-  'Two interlocked squares',
-  'Circular swirl with stars',
-  'Animal paw',
-  'Flame',
-  'Blue swirl',
-  'Leaf pattern',
-  'Zigzag pattern',
-  'Shield',
-  'Orange swirl',
-  'Pink swirl',
-  'Two crossed lines',
-  'Golden fish',
-  'Yin-Yang symbol',
-  'Blue swirl with dots',
-  'Bear face',
-  'Red claw',
-  'Circular blue swirl',
-  'Flower',
-  'Zigzag arrow',
-  'Animal paw',
-  'Bear face',
-  'Leaf',
-  'Flaming dragon',
-  'A in a circle',
+  'Collaborations',
+  'Collectibles',
+  'Contents',
+  'Events',
+  'Teachnology',
 ];
 
 const getRandomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
-async function listAllFiles() {
+async function listAllFilesTopic() {
   try {
-    const [files] = await admin.storage().bucket().getFiles({
-      prefix: 'images/emblems',
-    });
     nameOfCategories.forEach((name, index) => {
-      if (!files[index]?.metadata) return;
       // console.log(files[index].metadata.contentType);
-      // Emblem.create({
-      //   name: name,
-      //   rank: getRandomNumber(1, 10),
-      //   image: files[index].metadata.mediaLink,
-      //   isMutil: index % 6 === 0,
-      //   isNew: index % 5 === 0,
-      // });
+      Topic.create({
+        name: name,
+      });
     });
   } catch (error) {
     if (error.code === 404) {
@@ -84,4 +38,4 @@ async function listAllFiles() {
     }
   }
 }
-module.exports = { listAllFiles };
+module.exports = { listAllFilesTopic };
