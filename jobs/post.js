@@ -37,7 +37,7 @@ async function listAllFilesPosts() {
 
     const topic = await Topic.find({});
 
-    console.log(files.length);
+    // console.log(files.length);
     files.forEach((image, index) => {
       const link = image.metadata.mediaLink;
 

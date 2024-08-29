@@ -34,6 +34,7 @@ app.use('/api/emblems', require('./routers/emblems'));
 app.use('/api/categories', require('./routers/categories'));
 app.use('/api/worlds', require('./routers/worlds'));
 app.use('/api/posts', require('./routers/posts'));
+app.use('/api/topics', require('./routers/topic'));
 // app.use(errorHandler);
 
 app.listen(port, () => {
