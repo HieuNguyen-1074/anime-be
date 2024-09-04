@@ -6,6 +6,7 @@ const World = require('../models/world');
  * get Card by id
  */
 const getTopics = async (req, res) => {
+  const { topicId } = req.query;
   let topics = await Topic.find({});
   let posts = await Post.find({});
   topics = topics.map((topic) => {
