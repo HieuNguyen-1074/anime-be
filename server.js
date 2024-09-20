@@ -8,8 +8,9 @@ const { listAllFiles } = require('./jobs/emblem');
 
 const { readColor, listAllFilesCards } = require('./jobs/cards');
 const { listAllFilesWorlds } = require('./jobs/worlds');
-const { listAllFilesTopic } = require('./jobs/emblem copy');
+const { listAllFilesTopic } = require('./jobs/topic');
 const { listAllFilesPosts } = require('./jobs/post');
+const { listAllFilesBenz } = require('./jobs/beanz');
 
 connectDb();
 
@@ -28,6 +29,7 @@ app.use(
 // listAllFilesWorlds();
 // listAllFilesTopic();
 // listAllFilesPosts();
+// listAllFilesBenz();
 app.use('/api/card', require('./routers/card'));
 app.use('/api/collectors', require('./routers/collector'));
 app.use('/api/emblems', require('./routers/emblems'));
@@ -35,6 +37,7 @@ app.use('/api/categories', require('./routers/categories'));
 app.use('/api/worlds', require('./routers/worlds'));
 app.use('/api/posts', require('./routers/posts'));
 app.use('/api/topics', require('./routers/topic'));
+app.use('/api/beanz', require('./routers/beanz'));
 // app.use(errorHandler);
 
 app.listen(port, () => {

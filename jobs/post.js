@@ -12,6 +12,7 @@ const CardModel = require('../models/card');
 const Jimp = require('jimp');
 const Topic = require('../models/topic');
 const Post = require('../models/post');
+const { dataPost } = require('./dataPosts');
 
 const getRandomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -46,13 +47,11 @@ async function listAllFilesPosts() {
       // console.log(files[index].metadata);
       if (!image.metadata.name.split('/')[2]) return;
       const data = {
-        name: image.metadata.name.split('/')[2].split('.')[0] || '',
+        name: dataPost[index].name,
 
-        content:
-          'If you pass Date.now as the default in your mongoose schema, you are passing the function and mongoose will call that function every time a document needs a default value for that property. This results in the current time, at the time of document creation, being stored as the value for that property.',
+        content: dataPost[index].content,
         mediaLink: link,
-        shortDescription:
-          'However, if you pass Date.now() instead, you are passing the value returned by Date.now() rather than the function. By doing this, your documents will get the current time, at the time of schema creation, as the default value for that property. This means that your documents will store the time of the latest deployment, which is probably not what you want.',
+        shortDescription: dataPost[index].short,
         topicId: topic[parseInt(getRandomNumber(0, topic.length - 1))]._id,
         mediaType: image.metadata.contentType,
         col: 1,

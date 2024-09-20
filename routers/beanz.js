@@ -1,16 +1,16 @@
 const express = require('express');
-const { getPosts, getPostById } = require('../controllers/post');
+const { getBenzs, getBenzsPost } = require('../controllers/beanz');
 
 const router = express.Router();
 
 router
   .route('/')
 
-  .get(getPosts);
+  .get(getBenzs);
 
 router
-  .route('/:postId')
+  .route('/posts')
 
-  .get(getPostById);
+  .get(getBenzsPost);
 
 module.exports = router;
